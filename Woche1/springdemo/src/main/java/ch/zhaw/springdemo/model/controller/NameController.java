@@ -109,7 +109,7 @@ public ResponseEntity<List<String>> filterNames(
     .stream()
     .filter(name ->
       sex.equals(name.getGeschlecht()) &&
-      name.getName().startsWith(start) &&
+      name.getName().toLowerCase().startsWith(start.toLowerCase()) &&
       name.getName().length() == length
     )
     .map(x -> x.getName())
