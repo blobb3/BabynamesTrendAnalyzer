@@ -7,9 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,46 +77,47 @@ public class NameController {
   }
 
   // Aufgabe k
-  @GetMapping("/names/frequency")
-  public Integer getFrequency(@RequestParam String name) {
-    return listOfNames
-      .stream()
-      .filter(x -> name.equals(x.getName()))
-      .mapToInt(Name::getAnzahl)
-      // startwert => 0, elemente sollten auf die summe der integerklasse reduziert
-      // werden
-      .reduce(0, Integer::sum);
-  }
+ @GetMapping("/names/frequency")
+    public int getFrequency(@RequestParam String name) {
+        return listOfNames.stream()
+            .filter(x -> x.getName().equalsIgnoreCase(name))
+            .map(x -> x.getAnzahl())
+            .findFirst().orElse(0);
+    }
 
+
+   
   // Woche 2 , Aufgabe p
   @GetMapping("/names/name")
-  public ResponseEntity<List<String>> filterNames(
-    @RequestParam String sex,
-    @RequestParam String start,
-    @RequestParam int length
-  ) {
-    // Überprüfen Sie den Parameter "sex" auf Gültigkeit
-    if (!sex.equals("m") && !sex.equals("w")) {
-      return ResponseEntity.badRequest().build();
-    }
-
-    // Überprüfen Sie den Parameter "length" auf Gültigkeit
-    if (length <= 0) {
-      return ResponseEntity.status(422).build();
-    }
-
-    // Filtern Sie die Namen basierend auf den Parametern
-    List<String> filteredNames = listOfNames
-      .stream()
-      .filter(name ->
-        sex.equals(name.getGeschlecht()) &&
-        name.getName().startsWith(start) &&
-        name.getName().length() == length
-      )
-      .map(Name::getName)
-      .collect(Collectors.toCollection(ArrayList::new));
-
-    // Geben Sie die Namen zurück
-    return new ResponseEntity<>(filteredNames, HttpStatus.OK);
+public ResponseEntity<List<String>> filterNames(
+  @RequestParam String sex,
+  @RequestParam String start,
+  @RequestParam int length
+) {
+  // Überprüfen Sie den Parameter "sex" auf Gültigkeit
+  if (!sex.equals("m") && !sex.equals("w")) {
+    return ResponseEntity.badRequest().build();
   }
+
+  // Überprüfen Sie den Parameter "length" auf Gültigkeit
+  if (length <= 0) {
+    return ResponseEntity.status(422).build();
+  }
+
+  // Filtern Sie die Namen basierend auf den Parametern
+  List<String> filteredNames = listOfNames
+    .stream()
+    .filter(name ->
+      sex.equals(name.getGeschlecht()) &&
+      name.getName().startsWith(start) &&
+      name.getName().length() == length
+    )
+    .map(x -> x.getName())
+    .collect(Collectors.toList());
+
+  // Geben Sie die Namen zurück
+  return new ResponseEntity<>(filteredNames, HttpStatus.OK);
+}
+
+  
 }
