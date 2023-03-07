@@ -94,17 +94,17 @@ public class NameController {
   @RequestParam String start,
   @RequestParam int length
 ) {
-  // Überprüfen Sie den Parameter "sex" auf Gültigkeit
+  // Überprüfe Parameter "sex" auf Gültigkeit
   if (!sex.equals("m") && !sex.equals("w")) {
     return ResponseEntity.badRequest().build();
   }
 
-  // Überprüfen Sie den Parameter "length" auf Gültigkeit
+  // Überprüfe Parameter "length" auf Gültigkeit
   if (length <= 0) {
     return ResponseEntity.status(422).build();
   }
 
-  // Filtern Sie die Namen basierend auf den Parametern
+  // Filtere Namen basierend auf den Parametern
   List<String> filteredNames = listOfNames
     .stream()
     .filter(name ->
@@ -115,7 +115,7 @@ public class NameController {
     .map(x -> x.getName())
     .collect(Collectors.toList());
 
-  // Geben Sie die Namen zurück
+  // Gib Namen zurück
   return new ResponseEntity<>(filteredNames, HttpStatus.OK);
 }
 
