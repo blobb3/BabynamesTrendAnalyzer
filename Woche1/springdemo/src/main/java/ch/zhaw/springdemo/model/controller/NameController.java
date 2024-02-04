@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
@@ -20,13 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NameController {
 
-  private ArrayList<Name> listOfNames;
+    private List<Name> listOfNames;
 
-  @GetMapping("/names")
-  public ArrayList<Name> getNames() {
-    return listOfNames;
-  }
+    @Autowired
+    public NameController() {
+        this.listOfNames = new ArrayList<>();
+    }
 
+    @GetMapping("/names")
+    public List<Name> getNames() {
+        return listOfNames;
+    }
+    
+    
   @EventListener(ApplicationReadyEvent.class)
   public void runAfterStartup() throws Exception {
     listOfNames = new ArrayList<>();
@@ -89,22 +97,22 @@ public class NameController {
    
   // Woche 2 , Aufgabe p
   @GetMapping("/names/name")
-public ResponseEntity<List<String>> filterNames(
+  public ResponseEntity<List<String>> filterNames(
   @RequestParam String sex,
   @RequestParam String start,
   @RequestParam int length
 ) {
-  // Überprüfen Sie den Parameter "sex" auf Gültigkeit
+  // Überprüfe Parameter "sex" auf Gültigkeit
   if (!sex.equals("m") && !sex.equals("w")) {
     return ResponseEntity.badRequest().build();
   }
 
-  // Überprüfen Sie den Parameter "length" auf Gültigkeit
+  // Überprüfe Parameter "length" auf Gültigkeit
   if (length <= 0) {
     return ResponseEntity.status(422).build();
   }
 
-  // Filtern Sie die Namen basierend auf den Parametern
+  // Filtere Namen basierend auf den Parametern
   List<String> filteredNames = listOfNames
     .stream()
     .filter(name ->
@@ -115,9 +123,9 @@ public ResponseEntity<List<String>> filterNames(
     .map(x -> x.getName())
     .collect(Collectors.toList());
 
-  // Geben Sie die Namen zurück
+  // Gib Namen zurück
   return new ResponseEntity<>(filteredNames, HttpStatus.OK);
 }
 
-  
+
 }
