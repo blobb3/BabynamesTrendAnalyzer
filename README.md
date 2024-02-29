@@ -21,14 +21,17 @@ Prerequisites: Make sure Java JDK and Maven are installed on your system.
 
 1. Clone the repository:
    
-   `git clone https://github.com/IhrBenutzername/ZurichBabyNameFinder.git`
+   ```bash
+   git clone https://github.com/IhrBenutzername/BabynamesTrendAnalyzer.git```
 
 3. Build the project => Switch to the project directory and run:
   
-   `mvn install`
+   ```bash
+   mvn install```
 
 3. Start the application => Start the application with:
 
-   `mvn spring-boot:run`
+   ```bash
+   mvn spring-boot:run```
 
 The application is now accessible at  `http://localhost:8080`.
