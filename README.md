@@ -1,37 +1,34 @@
 ## BabynamesTrendAnalyzer
 
-Willkommen zum ZurichBabyNameFinder, meinem ersten Mini-GitHub-Projekt! Diese Spring Boot-Applikation wurde entwickelt, 
-um werdende Eltern bei der Wahl des perfekten Namens für ihr Kind zu unterstützen. Basierend auf einer umfangreichen 
-Datenanalyse von Babynamen aus der Stadt Zürich im Jahr 2021, bietet diese Applikation wertvolle Einblicke in die Namenstrends 
-und deren Popularität.
+Welcome to ZurichBabyNameFinder, my first mini GitHub project! This Spring Boot application was designed to assist expectant parents in choosing the perfect name for their child.
 
-### Funktionalitäten
-* Analyse von Babynamen: Einblicke in die Popularität und Häufigkeit von Babynamen in Zürich für das Jahr 2021.
-* Unterstützung bei der Namenswahl: Ermöglicht es Eltern, Namen basierend auf verschiedenen Kriterien wie Geschlecht und Häufigkeit zu filtern.
-* Interaktive Abfragen: Nutzer können spezifische Suchanfragen durchführen, um Namen nach ihren Präferenzen zu finden.
+### Features
+* Analysis of baby names: Insights into the popularity and frequency of baby names in Zurich for the year 2021.
+* Support in choosing names: Allows parents to filter names based on various criteria such as gender and frequency.
+* Interactive queries: Users can perform specific search queries to find names according to their preferences.
 
-### Technologien
+### Technologies
 
-Dieses Projekt wurde mit folgenden Technologien und Bibliotheken realisiert:
+This project was realized with the following technologies and libraries:
 
-* Spring Boot: Für das Backend und die Bereitstellung der REST-API.
-* Java: Als Programmiersprache der Wahl.
-* OpenCSV: Zur Verarbeitung der CSV-Daten.
-* Visual Studio Code: Als Entwicklungsumgebung.
+* Spring Boot: For the backend and provision of the REST API.
+* Java: As the programming language of choice.
+* OpenCSV: For processing CSV data.
+* Visual Studio Code: As the development environment.
 
-### Setupt & Installation
-Voraussetzungen: Stellen Sie sicher, dass Java JDK und Maven auf Ihrem System installiert sind.
+### Setup & Installation
+Prerequisites: Make sure Java JDK and Maven are installed on your system.
 
-1. Repository klonen:
+1. Clone the repository:
    
    `git clone https://github.com/IhrBenutzername/ZurichBabyNameFinder.git`
 
-3. Projekt bauen: Wechseln Sie in das Projektverzeichnis und führen Sie:
+3. Build the project => Switch to the project directory and run:
   
    `mvn install`
 
-3. Anwendung starten: Starten Sie die Anwendung mit:
+3. Start the application => Start the application with:
 
    `mvn spring-boot:run`
 
-Die Applikation ist nun unter `http://localhost:8080` erreichbar.
+The application is now accessible at  `http://localhost:8080`.
